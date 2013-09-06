@@ -39,12 +39,15 @@ implements OnClickListener
 		{
 		case R.id.start_title_button:
 		{
-			Intent intent = new Intent(TitleActivity.this, EditActivity.class);
+			Intent intent = new Intent(TitleActivity.this, DrawingActivity.class);
+			intent.putExtra("isFirst", true);
 			startActivity(intent);
 		}
 		break;
-		case R.id.history_title_button:
+		case R.id.setting_penalty_title_button:
 		{
+			Intent intent = new Intent(TitleActivity.this, SettingPenaltyActivity.class);
+			startActivity(intent);
 		}
 		break;
 		}

@@ -12,28 +12,36 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name="com.example.drawingshiritori.TitleActivity"
             android:label="@string/app_name"
-            android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.drawingshiritori.EditActivity"
+            android:name="com.example.drawingshiritori.SettingPenaltyActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Holo.NoActionBar"
-            android:screenOrientation="landscape">
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
         <activity
-            android:name="com.example.drawingshiritori.ResultActivity"
+            android:name="com.example.drawingshiritori.DrawingActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Holo.NoActionBar"
-            android:screenOrientation="landscape">
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.example.drawingshiritori.GuessActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.example.drawingshiritori.ShowingPenaltyActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Holo.NoActionBar" >
         </activity>
     </application>
 

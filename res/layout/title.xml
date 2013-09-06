@@ -9,7 +9,7 @@
     tools:context=".TitleActivity" >
 
     <Button
-        android:id="@+id/history_title_button"
+        android:id="@+id/setting_penalty_title_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -21,7 +21,7 @@
         android:id="@+id/start_title_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/history_title_button"
+        android:layout_above="@id/setting_penalty_title_button"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="スタート"/>
