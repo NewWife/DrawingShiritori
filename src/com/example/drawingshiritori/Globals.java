@@ -32,6 +32,8 @@ public class Globals extends Application
 	int drawer;
 	// パスした人
 	ArrayList<Integer> pather;
+	//間違えた人の人数
+	int failnum;
 
 	//全て初期化するメソッド
 	public void GlobalAllInit(){
@@ -43,6 +45,7 @@ public class Globals extends Application
 		drawer = 1;
 		imgPath = null;
 		pather = new ArrayList<Integer>();
+		failnum = 0;
 
 	}
 

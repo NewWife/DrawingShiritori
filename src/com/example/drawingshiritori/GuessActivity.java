@@ -63,6 +63,7 @@ implements View.OnClickListener
 				//正解した場合の処理
 				mp = MediaPlayer.create(this, R.raw.seikai);
 				mp.start();
+				if(globals.failnum  == 0){//前に間違えた人がいない場合
 				 //トーストで表示させる。
                 Toast toast =
                 Toast.makeText(getApplicationContext(),
@@ -70,9 +71,22 @@ implements View.OnClickListener
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
+                globals.failnum = 0;
 				//次の人へ
 				Intent i = new Intent(this, DrawingActivity.class);
 				startActivity(i);
+				}else{//前に間違えた人がいる場合
+					 //トーストで表示させる。
+	                Toast toast =
+	                Toast.makeText(getApplicationContext(),
+	                        String.format("正解！"+"\n"+"これまで間違えた人全員罰ゲーム！"),
+	                        Toast.LENGTH_LONG);
+	                toast.setGravity(Gravity.CENTER, 0, 0);
+	                toast.show();
+					Intent i = new Intent(this, ShowingPenaltyActivity.class);
+					startActivity(i);        
+				}
+					
 			}else{
 				//外した場合の処理
 				mp = MediaPlayer.create(this, R.raw.fuseikai);
@@ -90,7 +104,7 @@ implements View.OnClickListener
 	                        Toast.LENGTH_SHORT);
 	                toast.setGravity(Gravity.CENTER, 0, 0);
 	                toast.show();
-	                
+	                globals.failnum++;
 					// パスした人を登録し
 					globals.pather.add(next);
 					globals.now = next;
@@ -109,11 +123,9 @@ implements View.OnClickListener
 	                Toast toast1 =
 	                Toast.makeText(getApplicationContext(),
 	                        String.format("不正解！絵を書いた人罰ゲーム！"),
-	                        Toast.LENGTH_SHORT);
+	                        Toast.LENGTH_LONG);
 	                toast1.setGravity(Gravity.CENTER, 0, 0);
 	                toast1.show();
-					
-					intent.putExtra("ID",-1);//絵を書いた人の場合-1を渡す
 					startActivity(intent);
 				}
 			}	 
