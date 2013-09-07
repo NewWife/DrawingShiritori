@@ -3,32 +3,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <LinearLayout
-        android:id="@+id/center_column_edit"
+    <RelativeLayout
+        android:id="@+id/drawing_word_row_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
+
+        <Button
+            android:id="@+id/drawing_word_ok_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="OK" />
+
+        <EditText
+            android:id="@+id/drawing_word_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/drawing_word_ok_button"
+            android:inputType="text" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/drawing_remain_time_row_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drawing_word_row_layout" >
+
+        <TextView
+            android:id="@+id/drawing_remain_time_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="残り時間" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/drawing_navigation_row_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/drawing_next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="次へ" />
+
+        <ImageButton
+            android:id="@+id/drawing_clear_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:contentDescription="クリア"
+            android:src="@android:drawable/alert_dark_frame"/>
+
+        <ImageButton
+            android:id="@+id/drawing_eraser_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/drawing_clear_button"
+            android:contentDescription="消しゴム"
+            android:src="@android:drawable/alert_light_frame"/>
+
+        <ImageButton
+            android:id="@+id/drawing_pen_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/drawing_eraser_button"
+            android:contentDescription="ペン"
+            android:src="@android:drawable/arrow_down_float"/>
+    </RelativeLayout>
+
+    <com.example.drawingshiritori.DrawSurfaceView
+        android:id="@+id/draw_surface_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="5" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ここに色とスタンプ" />
-        </LinearLayout>
-
-        <com.example.drawingshiritori.DrawSurfaceView
-            android:id="@+id/draw_surface_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="10dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+        android:layout_above="@id/drawing_navigation_row_layout"
+        android:layout_below="@id/drawing_remain_time_row_layout"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp" />
 
 </RelativeLayout>
