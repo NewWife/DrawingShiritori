@@ -4,6 +4,7 @@ import com.example.pictureshiritori.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -19,6 +20,10 @@ import android.widget.Toast;
 public class DrawingActivity extends Activity
 implements OnClickListener
 {
+	/**
+	 * カウントダウン機能を提供するためのクラス
+	 *
+	 */
 	public class MyCountDownTimer extends CountDownTimer
 	{
 		private TextView timerView;
@@ -48,6 +53,9 @@ implements OnClickListener
 		}
 
 	}
+
+	//
+	private final String IMAGE_FILE_NAME = "tmp.jpg";
 
 	// 【DEBUG】
 	private final String LOG = "DrawingActivity";
@@ -160,16 +168,18 @@ implements OnClickListener
 	{
 		String inputWord = wordEditText.getText().toString();
 
-		if(!validation(inputWord)) return;
-		if(!isInputedWord)
-		{
-			myCountDownTimer.start();
-			disableWordInput();
-			disableOkButton();
-			drawSurfaceView.enableDrawing();
-			Toast.makeText(this, "start drawing", Toast.LENGTH_SHORT).show();
-			isInputedWord = true;
-		}
+		// 既に単語を入力していた場合
+		// バリデーションに引っかかった場合
+		// 無効にする
+		if(isInputedWord || !validation(inputWord)) return;
+
+		// タイマーを起動し、各種UIを触れないようにする
+		myCountDownTimer.start();
+		disableWordInput();
+		disableOkButton();
+		drawSurfaceView.enableDrawing();
+		Toast.makeText(this, "start drawing", Toast.LENGTH_SHORT).show();
+		isInputedWord = true;
 		// 外した場合
 		/*
 		else
@@ -196,7 +206,7 @@ implements OnClickListener
 				startActivity(intent);
 			}
 		}
-		*/
+		 */
 	}
 
 	/**
@@ -225,7 +235,9 @@ implements OnClickListener
 	 */
 	private void onClickNextButton()
 	{
+		// 単語を入力していなかった場合
 		if(!isInputedWord) return;
+		/*
 		// パスした人が存在するならば
 		if(globals.pather.size() > 0)
 		{
@@ -233,6 +245,14 @@ implements OnClickListener
 			Intent intent = new Intent(DrawingActivity.this, ShowingPenaltyActivity.class);
 			startActivity(intent);
 		}
+		 */
+
+		// 画像の保存
+		Bitmap bitmap = drawSurfaceView.getBitmap();
+		globals.saveBitmap(IMAGE_FILE_NAME, bitmap);
+		globals.imgPath = IMAGE_FILE_NAME;
+
+		// 現在の人を絵を描いた人に設定
 		globals.drawer = globals.now;
 		// 順番を次に飛ばして
 		int next = (++globals.now) % globals.player;
