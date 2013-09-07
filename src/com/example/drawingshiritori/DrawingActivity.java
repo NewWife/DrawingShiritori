@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DrawingActivity extends Activity
 implements OnClickListener
@@ -29,9 +30,16 @@ implements OnClickListener
 
 	// お絵かきビュー
 	private DrawSurfaceView drawSurfaceView;
+	// カウントダウンをするカスタムクラス
+	private EditText wordEditText;
+	private MyCountDownTimer myCountDownTimer;
 	private boolean isFirst;
 	private boolean isInputedWord;
-	private String themeWord;
+
+	// お題の格納する変数
+	private String preWord;
+
+	private Globals globals = (Globals)this.getApplication();
 
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -39,7 +47,10 @@ implements OnClickListener
 		setContentView(R.layout.drawing);
 
 		// get layout content
+		wordEditText = (EditText)findViewById(R.id.drawing_word_edit_text);
 		drawSurfaceView = (DrawSurfaceView)findViewById(R.id.draw_surface_view);
+		drawSurfaceView.disableDrawing();
+
 		Button okButton = (Button)findViewById(R.id.drawing_word_ok_button);
 		okButton.setOnClickListener(this);
 		Button nextButton = (Button)findViewById(R.id.drawing_next_button);
@@ -50,23 +61,22 @@ implements OnClickListener
 		eraserButton.setOnClickListener(this);
 		ImageButton penButton = (ImageButton)findViewById(R.id.drawing_pen_button);
 		penButton.setOnClickListener(this);
+		TextView remainTextView = (TextView)findViewById(R.id.drawing_remain_time_text_view);
+
+		// カウントダウンタイマーを指定の時間で初期化する
+		myCountDownTimer = new MyCountDownTimer(LIMIT_TIME * 1000, 10, remainTextView);
 
 		// 一番始めかどうかを調べる
 		Intent intent = getIntent();
 		isFirst = intent.getBooleanExtra("isFirst", false);
 
-		// 始めならば
+		// 始めてならば
 		if(isFirst)
 		{
 			// テーマを自動的に生成する
-			themeWord = generateThemeWord();
-			// ボタンを見えなくする
-			okButton = (Button)findViewById(R.id.drawing_word_ok_button);
-			// お題を入力し、エディット出来なくする
-			EditText editText = (EditText)findViewById(R.id.drawing_word_edit_text);
-			editText.setText(themeWord);
-			editText.setEnabled(false);
-			editText.setFocusable(false);
+			preWord = generateThemeWord();
+			// 単語入力の無効化を行う
+			disableWordInput();
 		}
 	}
 
@@ -78,7 +88,7 @@ implements OnClickListener
 		// 単語の入力欄に対してOKを押した場合
 		case R.id.drawing_word_ok_button:
 		{
-
+			onClickOkButton();
 			break;
 		}
 		// 次の画面へ移動する
@@ -97,7 +107,6 @@ implements OnClickListener
 		case R.id.drawing_eraser_button:
 		{
 			drawSurfaceView.setColor(Color.WHITE, ERASER_WIDTH);
-			Log.d(LOG, "push erase button");
 			break;
 		}
 		// 鉛筆ボタンが押された場合
@@ -113,7 +122,22 @@ implements OnClickListener
 
 	private void onClickOkButton()
 	{
+		// 前回の絵を当てられていれば
+		String inputWord = wordEditText.getText().toString();
+		if(inputWord.equals(preWord) && !isInputedWord)
+		{
+			myCountDownTimer.start();
+			disableWordInput();
+			disableOkButton();
+			drawSurfaceView.enableDrawing();
+			Toast.makeText(this, "start drawing", Toast.LENGTH_SHORT).show();
+		}
+		// 外した場合
+		else
+		{
 
+		}
+		isInputedWord = true;
 	}
 
 	/**
@@ -123,5 +147,22 @@ implements OnClickListener
 	{
 		int r = (int)(Math.random() * TEMPLATE_THEME_WORD.length);
 		return TEMPLATE_THEME_WORD[r];
+	}
+
+	private void disableWordInput()
+	{
+		// お題を入力し、エディット出来なくする
+		wordEditText.setText(preWord);
+		wordEditText.setEnabled(false);
+		wordEditText.setFocusable(false);
+
+	}
+
+	// OKボタンの無効化
+	private void disableOkButton()
+	{
+		// ボタンを見えなくする
+		Button okButton = (Button)findViewById(R.id.drawing_word_ok_button);
+		okButton.setVisibility(View.GONE);
 	}
 }

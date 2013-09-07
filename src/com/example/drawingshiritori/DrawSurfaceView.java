@@ -19,6 +19,9 @@ implements SurfaceHolder.Callback
 	// 初期で描かれる色の設定
 	private int DEFAULT_COLOR = Color.BLACK;
 
+	// キャンバスの描画の有効・無効
+	private boolean drawingDisable = false;
+
 	private SurfaceHolder mHolder;
 	private Bitmap bitmap;
 
@@ -92,6 +95,7 @@ implements SurfaceHolder.Callback
 	@Override
 	public boolean onTouchEvent(MotionEvent e)
 	{
+		if(drawingDisable) return true;
 		switch(e.getAction())
 		{
 		case MotionEvent.ACTION_DOWN:
@@ -171,5 +175,17 @@ implements SurfaceHolder.Callback
 		paint.setColor(color);
 		paint.setStrokeWidth(width);
 		Log.i("MemoWrite", Integer.toString(color));
+	}
+
+	// SurfaceViewの機能を無効にする
+	public void disableDrawing()
+	{
+		drawingDisable = true;
+	}
+
+	// SurfaceViewの機能を有効にする
+	public void enableDrawing()
+	{
+		drawingDisable = false;
 	}
 }
