@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +19,32 @@ import android.widget.Toast;
 public class DrawingActivity extends Activity
 implements OnClickListener
 {
+	public class MyCountDownTimer extends CountDownTimer
+	{
+		private TextView timerView;
+
+		public MyCountDownTimer(long millisInFuture, long countDownInterval, TextView timerView)
+		{
+			super(millisInFuture, countDownInterval);
+			this.timerView = timerView;
+		}
+
+		@Override
+		public void onFinish()
+		{
+			// カウントダウン完了後に呼ばれる
+			timerView.setText("0.00");
+		}
+
+		@Override
+		public void onTick(long millisUntilFinished) {
+
+			// インターバル(countDownInterval)毎に呼ばれる
+			timerView.setText(Long.toString(millisUntilFinished/1000%60) + ":" + String.format("%02d", (millisUntilFinished / 10)%100));
+		}
+
+	}
+
 	// 【DEBUG】
 	private final String LOG = "DrawingActivity";
 	// 【DEBUG】テンプレートのお題をこちらで決める
@@ -135,7 +162,7 @@ implements OnClickListener
 		// 外した場合
 		else
 		{
-
+			Intent intent = new Intent();
 		}
 		isInputedWord = true;
 	}
@@ -149,9 +176,9 @@ implements OnClickListener
 		return TEMPLATE_THEME_WORD[r];
 	}
 
+	// お題を入力し、エディット出来なくする
 	private void disableWordInput()
 	{
-		// お題を入力し、エディット出来なくする
 		wordEditText.setText(preWord);
 		wordEditText.setEnabled(false);
 		wordEditText.setFocusable(false);
