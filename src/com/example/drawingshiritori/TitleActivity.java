@@ -19,7 +19,7 @@ public class TitleActivity extends Activity
 implements OnClickListener
 {
 	//制限時間の配列
-	private String[] timeLimit = {"10", "30", "60"};
+	private String[] timeLimit = {"60", "30", "10"};
 	//プレイ人数の配列
 	//private int[] player = {3,4,5,6,7,8,9,10};
 	//グローバル変数
@@ -58,7 +58,7 @@ implements OnClickListener
         	                //トーストで表示させる。
         	                Toast toast =
         	                Toast.makeText(getApplicationContext(),
-        	                        String.format("%s秒に設定されました。", item),
+        	                        String.format("制限時間は%s秒です。", item),
         	                        Toast.LENGTH_SHORT);
         	                toast.setGravity(Gravity.CENTER, 0, 0);
         	                toast.show();

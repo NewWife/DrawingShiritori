@@ -24,15 +24,26 @@
         android:layout_above="@id/setting_penalty_title_button"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="スタート"/>
+        android:text="スタート" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="77dp"
+        android:text="制限時間"
+        android:textSize="24sp" />
 
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="46dp"
-        android:layout_marginTop="78dp" />
+        android:layout_below="@+id/textView1"
+        android:layout_marginLeft="29dp"
+        android:textSize="18sp" />
 
 </RelativeLayout>
