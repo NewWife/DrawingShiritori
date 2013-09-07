@@ -16,38 +16,34 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 public class GuessActivity extends Activity
+implements View.OnClickListener
 {
 	//グローバル変数
 	Globals globals;
 	
 	public void onCreate(Bundle savedInstanceState)
 	{
-		ImageView imgview = (ImageView)findViewById(R.id.guess_imageView);
-		Button okButton = (Button)findViewById(R.id.guess_word_ok_button);
+		
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.guess);
 		
+		ImageView imgview = (ImageView)findViewById(R.id.guess_imageView);
+		Button okButton = (Button)findViewById(R.id.guess_word_ok_button);
+		okButton.setOnClickListener(this);
+		
 		//グローバル変数を取得
 		globals = (Globals) this.getApplication();
-		
-		//[DEBUG]テスト用のパス
-		//globals.imgPath = "R.";
-		
+		/*		
 		//ファイルのパスから絵を取得し、画像を表示させる。
 		File imgfile = new File(globals.imgPath);
 		if(imgfile.exists()){
 		Bitmap imgBitmap = BitmapFactory.decodeFile(imgfile.getAbsolutePath());
 		imgview.setImageBitmap(imgBitmap);
 		}
+						*/
 		
-		okButton.setOnClickListener(new Button.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				onClickOkButton();				
-			}
-		});
-
+				
 	}
 
 	
@@ -78,7 +74,12 @@ public class GuessActivity extends Activity
 	    	 
 	     
 	}
-	       
+
+	@Override
+	public void onClick(View v)
+	{
+		onClickOkButton();
+	}
 }
 	
 

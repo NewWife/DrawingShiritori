@@ -239,6 +239,7 @@ implements OnClickListener
 		// 順番を次に飛ばして
 		int next = (++globals.now) % globals.player;
 		globals.now = next;
+		globals.word = wordEditText.getText().toString();
 		// 画面を切り替えて次の人移り、答え予測画面へ
 		Intent intent = new Intent(DrawingActivity.this, GuessActivity.class);
 		startActivity(intent);
