@@ -21,7 +21,7 @@ implements OnClickListener
 	//制限時間の配列
 	private String[] timeLimit = {"60", "30", "10"};
 	//プレイ人数の配列
-	//private int[] player = {3,4,5,6,7,8,9,10};
+	private String[] player = {"3","4","5","6","7","8","9","10"};
 	//グローバル変数
 	Globals globals;
 
@@ -40,8 +40,15 @@ implements OnClickListener
 		//制限時間
 		Spinner spinner = (Spinner)findViewById(R.id.spinner1);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		                android.R.layout.simple_spinner_item,timeLimit);
+		                android.R.layout.simple_dropdown_item_1line,timeLimit);
         spinner.setAdapter(adapter);
+        
+      //プレイヤーの数
+      	Spinner spinner2 = (Spinner)findViewById(R.id.spinner2);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+    		                android.R.layout.simple_dropdown_item_1line,player);
+        spinner2.setAdapter(adapter2);
+        
         
         //プルダウンメニューで選択された時
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -55,10 +62,44 @@ implements OnClickListener
         	                int stringToValue = Integer.parseInt(item);
         	                globals.limit = stringToValue;
         	                
+        	                String valueToStringLimit = String.valueOf(globals.limit);
+        	                String valueToStringPlayer = String.valueOf(globals.player);
+        	                
         	                //トーストで表示させる。
         	                Toast toast =
         	                Toast.makeText(getApplicationContext(),
-        	                        String.format("制限時間は%s秒です。", item),
+        	                        String.format("制限時間は%s秒です。"+"\n"+"プレイヤーは%s人です。", valueToStringLimit,valueToStringPlayer),
+        	                        Toast.LENGTH_SHORT);
+        	                toast.setGravity(Gravity.CENTER, 0, 0);
+        	                toast.show();
+        	                
+        	            }
+        	            @Override
+        	            public void onNothingSelected(AdapterView<?> parent) {
+        	                Toast.makeText(getApplicationContext(),
+        	                        "onNothingSelected", Toast.LENGTH_SHORT).show();
+        	            }
+
+		});
+        
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        	@Override
+        	            public void onItemSelected(AdapterView<?> parent,
+        	                    View view, int position, long id) {
+        	                Spinner spinner = (Spinner) parent;
+        	                String item = (String) spinner.getSelectedItem();
+        	                
+        	                //グローバル変数に選択したプレイヤーを設定
+        	                int stringToValue = Integer.parseInt(item);
+        	                globals.player = stringToValue;
+        	                
+        	                String valueToStringLimit = String.valueOf(globals.limit);
+        	                String valueToStringPlayer = String.valueOf(globals.player);
+        	                
+        	                //トーストで表示させる。
+        	                Toast toast =
+        	                Toast.makeText(getApplicationContext(),
+        	                        String.format("制限時間は%s秒です。"+"\n"+"プレイヤーは%s人です。", valueToStringLimit,valueToStringPlayer),
         	                        Toast.LENGTH_SHORT);
         	                toast.setGravity(Gravity.CENTER, 0, 0);
         	                toast.show();
