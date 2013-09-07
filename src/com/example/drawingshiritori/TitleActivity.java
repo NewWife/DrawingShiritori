@@ -30,26 +30,26 @@ implements OnClickListener
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.title);
-		
+
 		//グローバル変数を取得
 				globals = (Globals) this.getApplication();
 				//初期化
 				globals.GlobalAllInit();
-		
+
 		//プルダウンメニューの設定
 		//制限時間
 		Spinner spinner = (Spinner)findViewById(R.id.spinner1);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 		                android.R.layout.simple_dropdown_item_1line,timeLimit);
         spinner.setAdapter(adapter);
-        
+
       //プレイヤーの数
       	Spinner spinner2 = (Spinner)findViewById(R.id.spinner2);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
     		                android.R.layout.simple_dropdown_item_1line,player);
         spinner2.setAdapter(adapter2);
-        
-        
+
+
         //プルダウンメニューで選択された時
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         	@Override
@@ -57,14 +57,14 @@ implements OnClickListener
         	                    View view, int position, long id) {
         	                Spinner spinner = (Spinner) parent;
         	                String item = (String) spinner.getSelectedItem();
-        	                
+
         	                //グローバル変数に選択した制限時間を設定
         	                int stringToValue = Integer.parseInt(item);
         	                globals.limit = stringToValue;
-        	                
+
         	                String valueToStringLimit = String.valueOf(globals.limit);
         	                String valueToStringPlayer = String.valueOf(globals.player);
-        	                
+
         	                //トーストで表示させる。
         	                Toast toast =
         	                Toast.makeText(getApplicationContext(),
@@ -72,7 +72,7 @@ implements OnClickListener
         	                        Toast.LENGTH_SHORT);
         	                toast.setGravity(Gravity.CENTER, 0, 0);
         	                toast.show();
-        	                
+
         	            }
         	            @Override
         	            public void onNothingSelected(AdapterView<?> parent) {
@@ -81,21 +81,21 @@ implements OnClickListener
         	            }
 
 		});
-        
+
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         	@Override
         	            public void onItemSelected(AdapterView<?> parent,
         	                    View view, int position, long id) {
         	                Spinner spinner = (Spinner) parent;
         	                String item = (String) spinner.getSelectedItem();
-        	                
+
         	                //グローバル変数に選択したプレイヤーを設定
         	                int stringToValue = Integer.parseInt(item);
         	                globals.player = stringToValue;
-        	                
+
         	                String valueToStringLimit = String.valueOf(globals.limit);
         	                String valueToStringPlayer = String.valueOf(globals.player);
-        	                
+
         	                //トーストで表示させる。
         	                Toast toast =
         	                Toast.makeText(getApplicationContext(),
@@ -103,7 +103,7 @@ implements OnClickListener
         	                        Toast.LENGTH_SHORT);
         	                toast.setGravity(Gravity.CENTER, 0, 0);
         	                toast.show();
-        	                
+
         	            }
         	            @Override
         	            public void onNothingSelected(AdapterView<?> parent) {
@@ -112,11 +112,14 @@ implements OnClickListener
         	            }
 
 		});
-        
+
 
 		// Buttonを取得
 		Button startButton = (Button)findViewById(R.id.start_title_button);
 		startButton.setOnClickListener(this);
+
+		Button settingButton = (Button)findViewById(R.id.setting_penalty_title_button);
+		settingButton.setOnClickListener(this);
 	}
 
 	@Override

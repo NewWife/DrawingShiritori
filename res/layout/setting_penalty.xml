@@ -1,31 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.drawingshiritori.ShowingPenaltyActivity" >
+    tools:context="com.example.drawingshiritori.SettingPenaltyActivity" >
 
-    <ListView
-        android:id="@+id/result_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="1" >
-    </ListView>
-
+    <!--
     <RelativeLayout
+        android:id="@+id/setting_penalty_add_penalty_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="horizontal" >
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
 
         <Button
+            android:id="@+id/setting_penalty_add_penalty_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="ちょっと待った" />
+            android:layout_alignParentRight="true"
+            android:text="追加" />
+
+        <Spinner
+            android:id="@+id/setting_penalty_add_penalty_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/setting_penalty_add_penalty_button"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    -->
+
+    <RelativeLayout
+        android:id="@+id/setting_penalty_delete_return_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <!--
+        <Button
+            android:id="@+id/setting_penalty_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="削除" />
+        -->
+
+        <Button
+            android:id="@+id/setting_penalty_return_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="戻る" />
     </RelativeLayout>
 
-</LinearLayout>
+    <!--
+    <ListView
+        android:id="@+id/setting_penalty_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/setting_penalty_add_penalty_layout"
+        android:layout_above="@id/setting_penalty_delete_return_layout">
+    </ListView>
+    -->
+
+    <LinearLayout
+        android:id="@+id/setting_penalty_pulldown_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_above="@id/setting_penalty_delete_return_layout"
+        android:layout_alignParentTop="true" >
+
+        <Spinner
+            android:id="@+id/setting_penalty_pulldown_spinner_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/setting_penalty_pulldown_spinner_2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/setting_penalty_pulldown_spinner_3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/setting_penalty_pulldown_spinner_4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/setting_penalty_pulldown_spinner_5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</RelativeLayout>

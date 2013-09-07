@@ -16,7 +16,9 @@ import android.util.Log;
 public class Globals extends Application
 {
 	private final String TAG = "Globals";
+
 	//グローバル変数に使用する変数
+	final String[] PENALTY_CONTENTS = {"腹筋10回", "腕立て10回", "スクワット10回", "空気椅子10秒", "背筋10回"};
 
 	//今何番目のプレイヤーか
 	int now;
@@ -30,6 +32,8 @@ public class Globals extends Application
 	String imgPath;
 	// パスした人
 	ArrayList<Integer> pather;
+	// 罰ゲームの内容
+	String[] penaltys;
 
 	//全て初期化するメソッド
 	public void GlobalAllInit(){
@@ -39,6 +43,11 @@ public class Globals extends Application
 		drawer = 1;
 		imgPath = null;
 		pather = new ArrayList<Integer>();
+		penaltys = new String[5]; // 現在、設定できる罰ゲームの数が5のため
+		for(int i = 0, n = 5; i < n; ++i)
+		{
+			penaltys[i] = PENALTY_CONTENTS[i];
+		}
 	}
 
 	public void saveBitmap(String fileName, Bitmap bitmap)
