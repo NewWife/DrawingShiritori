@@ -10,11 +10,17 @@ public class Globals extends Application {
 	int player;
 	//制限時間
 	int limit;
+	//何が描かれているのか
+	String word;
+	//絵へのパス
+	String imgPath;
 	
 	//全て初期化するメソッド
 	public void GlobalAllInit(){
 		now = 1;
 		player = 3;
 		limit = 60;
+		word = "";
+		imgPath = "";
 	}
 }

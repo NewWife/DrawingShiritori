@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.drawingshiritori.GuessActivity" >
+    android:layout_height="match_parent" >
 
     <RelativeLayout
+        android:id="@+id/guess_word_row_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3" >
+        android:layout_alignParentTop="true" >
+
+        <EditText
+            android:id="@+id/guess_word_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/guess_word_ok_button"
+            android:layout_toLeftOf="@id/guess_word_ok_button"
+            android:inputType="text" />
+
         <Button
-            android:id="@+id/decision_theme_button"
+            android:id="@+id/guess_word_ok_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="テーマを決定する"/>
+            android:layout_alignParentTop="true"
+            android:text="OK" />
+
     </RelativeLayout>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/guess_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/guess_word_row_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="30dp" />
+
+</RelativeLayout>

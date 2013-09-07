@@ -16,6 +16,9 @@ import android.view.SurfaceView;
 public class DrawSurfaceView extends SurfaceView
 implements SurfaceHolder.Callback
 {
+	// 初期で描かれる色の設定
+	private int DEFAULT_COLOR = Color.BLACK;
+
 	private SurfaceHolder mHolder;
 	private Bitmap bitmap;
 
@@ -41,7 +44,7 @@ implements SurfaceHolder.Callback
 
 		// 線と色の設定
 		paint = new Paint();
-		paint.setColor(Color.BLACK);
+		paint.setColor(DEFAULT_COLOR);
 		paint.setAntiAlias(true);
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setStrokeWidth(6);
@@ -58,7 +61,7 @@ implements SurfaceHolder.Callback
 
 		// 線と色の設定
 		paint = new Paint();
-		paint.setColor(Color.RED);
+		paint.setColor(DEFAULT_COLOR);
 		paint.setAntiAlias(true);
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setStrokeWidth(6);
@@ -72,7 +75,7 @@ implements SurfaceHolder.Callback
 		WIDTH = width;
 		HEIGHT = height;
 		mHolder = holder;
-		paint.setColor(Color.RED);
+		paint.setColor(DEFAULT_COLOR);
 		clearCanvas();
 	}
 
