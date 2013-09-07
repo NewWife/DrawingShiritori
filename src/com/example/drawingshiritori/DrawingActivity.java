@@ -125,6 +125,9 @@ implements OnClickListener
 			preWord = generateThemeWord();
 			// 単語入力の無効化を行う
 			disableWordInput();
+		}else{
+			String tailstr = globals.word.substring(globals.word.length()-1);
+			wordEditText.setText(tailstr);
 		}
 	}
 
