@@ -69,7 +69,7 @@ public class Globals extends Application
 	 * @param fileName 読み込みたいファイル名
 	 * @return bitmap Bitmap型
 	 */
-	private Bitmap loadBitmap(String fileName)
+	public Bitmap loadBitmap(String fileName)
 	{
 		Bitmap bitmap = null;
 		try
