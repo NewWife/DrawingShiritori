@@ -37,6 +37,7 @@ implements OnClickListener
 			// 現在描いている人を罰ゲームの対象にして罰ゲーム表示画面へ
 			globals.pather.add(globals.now);
 			Intent intent = new Intent(DrawingActivity.this, ShowingPenaltyActivity.class);
+			myCountDownTimer.cancel();
 			startActivity(intent);
 		}
 
@@ -233,6 +234,7 @@ implements OnClickListener
 		{
 			// 罰ゲーム通知画面に飛ばす
 			Intent intent = new Intent(DrawingActivity.this, ShowingPenaltyActivity.class);
+			myCountDownTimer.cancel();
 			startActivity(intent);
 		}
 		globals.drawer = globals.now;
@@ -242,6 +244,7 @@ implements OnClickListener
 		globals.word = wordEditText.getText().toString();
 		// 画面を切り替えて次の人移り、答え予測画面へ
 		Intent intent = new Intent(DrawingActivity.this, GuessActivity.class);
+		myCountDownTimer.cancel();
 		startActivity(intent);
 	}
 
