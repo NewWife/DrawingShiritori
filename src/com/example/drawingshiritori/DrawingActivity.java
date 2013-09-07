@@ -34,6 +34,10 @@ implements OnClickListener
 		{
 			// カウントダウン完了後に呼ばれる
 			timerView.setText("0.00");
+			// 現在描いている人を罰ゲームの対象にして罰ゲーム表示画面へ
+			globals.pather.add(globals.now);
+			Intent intent = new Intent(DrawingActivity.this, ShowingPenaltyActivity.class);
+			startActivity(intent);
 		}
 
 		@Override
@@ -48,7 +52,7 @@ implements OnClickListener
 	// 【DEBUG】
 	private final String LOG = "DrawingActivity";
 	// 【DEBUG】テンプレートのお題をこちらで決める
-	private final String[] TEMPLATE_THEME_WORD = {"とけい", "ゴリラ", "ラッパ", "コップ", "ハンガー"};
+	private final String[] TEMPLATE_THEME_WORD = {"とけい", "ごりら", "らっぱ", "こっぷ", "はんが"};
 	// 【DEBUG】制限時間をこちらで決める
 	private final int LIMIT_TIME = 60;
 
@@ -66,12 +70,14 @@ implements OnClickListener
 	// お題の格納する変数
 	private String preWord;
 
-	private Globals globals = (Globals)this.getApplication();
+	private Globals globals;
 
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.drawing);
+
+		globals = (Globals)this.getApplication();
 
 		// get layout content
 		wordEditText = (EditText)findViewById(R.id.drawing_word_edit_text);
@@ -121,7 +127,7 @@ implements OnClickListener
 		// 次の画面へ移動する
 		case R.id.drawing_next_button:
 		{
-
+			onClickNextButton();
 			break;
 		}
 		// クリアボタンが押された場合
@@ -147,24 +153,93 @@ implements OnClickListener
 		}
 	}
 
+	/**
+	 * 書くお題に対してOKボタンを押した時の
+	 */
 	private void onClickOkButton()
 	{
-		// 前回の絵を当てられていれば
 		String inputWord = wordEditText.getText().toString();
-		if(inputWord.equals(preWord) && !isInputedWord)
+
+		if(!validation(inputWord)) return;
+		if(!isInputedWord)
 		{
 			myCountDownTimer.start();
 			disableWordInput();
 			disableOkButton();
 			drawSurfaceView.enableDrawing();
 			Toast.makeText(this, "start drawing", Toast.LENGTH_SHORT).show();
+			isInputedWord = true;
 		}
 		// 外した場合
+		/*
 		else
 		{
-			Intent intent = new Intent();
+			// 順番を次に飛ばして
+			int next = (++globals.now) % globals.player;
+			// 次のプレイヤーが描いた人と異なれば
+			if(globals.drawer != globals.now)
+			{
+				// パスした人を登録し
+				globals.pather.add(next);
+				globals.now = next;
+				// 画面を切り替えて次の人へ
+				Intent intent = new Intent(DrawingActivity.this, DrawingActivity.class);
+				startActivity(intent);
+			}
+			// 描いた人ならば
+			else
+			{
+				// パスした人を全て除外し、
+				globals.pather.clear();
+				// 罰ゲーム通知画面に飛ばす
+				Intent intent = new Intent(DrawingActivity.this, ShowingPenaltyActivity.class);
+				startActivity(intent);
+			}
 		}
-		isInputedWord = true;
+		*/
+	}
+
+	/**
+	 * 入力された文字のバリデーションを行う
+	 */
+	private boolean validation(String str)
+	{
+		final String MATCH_HIRAGANA = "^[\\u3040-\\u309F]+$";
+		// 文字が入力されているか
+		if(str.length() == 0)
+		{
+			Toast.makeText(this, "書く文字を入力して下さい", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		// ひらがなんみで入力されているか
+		if(!str.matches(MATCH_HIRAGANA))
+		{
+			Toast.makeText(this, "ひらがなのみで入力して下さい", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 次へボタンを押した時の動作定義
+	 */
+	private void onClickNextButton()
+	{
+		if(!isInputedWord) return;
+		// パスした人が存在するならば
+		if(globals.pather.size() > 0)
+		{
+			// 罰ゲーム通知画面に飛ばす
+			Intent intent = new Intent(DrawingActivity.this, ShowingPenaltyActivity.class);
+			startActivity(intent);
+		}
+		globals.drawer = globals.now;
+		// 順番を次に飛ばして
+		int next = (++globals.now) % globals.player;
+		globals.now = next;
+		// 画面を切り替えて次の人移り、答え予測画面へ
+		Intent intent = new Intent(DrawingActivity.this, GuessActivity.class);
+		startActivity(intent);
 	}
 
 	/**
@@ -176,7 +251,9 @@ implements OnClickListener
 		return TEMPLATE_THEME_WORD[r];
 	}
 
-	// お題を入力し、エディット出来なくする
+	/**
+	 *  お題を入力し、エディット出来なくする
+	 */
 	private void disableWordInput()
 	{
 		wordEditText.setText(preWord);
@@ -185,7 +262,9 @@ implements OnClickListener
 
 	}
 
-	// OKボタンの無効化
+	/**
+	 *  OKボタンの無効化
+	 */
 	private void disableOkButton()
 	{
 		// ボタンを見えなくする
