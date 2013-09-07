@@ -4,28 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.drawingshiritori.ShowingPenaltyActivity" >
-
-    <ListView
-        android:id="@+id/result_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="1" >
-    </ListView>
+    tools:context="com.example.drawingshiritori.gomi" >
+<!--一時的にコメントアウト
+<resources>
+    <string-array android:name="string_array_name">
+        <item1>penaluty1</item1>
+        <item2>penaluty2</item2>
+        <item3>penaluty3</item3>
+        <item4>penaluty4</item4>
+        <item5>penaluty5</item5>
+    </string-array>
+</resources>
+-->
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3" >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/penalty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:orientation="horizontal" >
 
-        <Button
+        <FrameLayout
+            android:id="@+id/frameLayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="ちょっと待った" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="57dp"
+            android:layout_marginTop="154dp" >
+        </FrameLayout>
+
+
     </RelativeLayout>
 
 </LinearLayout>

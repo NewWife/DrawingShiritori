@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.drawingshiritori.ShowingPenaltyActivity" >
+    tools:context="com.example.drawingshiritori.gomi" >
 
     <ListView
         android:id="@+id/result_list_view"
@@ -20,12 +20,6 @@
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:orientation="horizontal" >
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="ちょっと待った" />
     </RelativeLayout>
 
 </LinearLayout>
