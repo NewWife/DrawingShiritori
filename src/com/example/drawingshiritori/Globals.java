@@ -24,10 +24,12 @@ public class Globals extends Application
 	int player;
 	//制限時間
 	int limit;
+	//何が描かれているのか
+	String word;
+	//絵へのパス
+	String imgPath;
 	// 描いた人
 	int drawer;
-	// 画像のパス
-	String imgPath;
 	// パスした人
 	ArrayList<Integer> pather;
 
@@ -36,9 +38,12 @@ public class Globals extends Application
 		now = 1;
 		player = 3;
 		limit = 60;
+		word = "";
+		imgPath = "";
 		drawer = 1;
 		imgPath = null;
 		pather = new ArrayList<Integer>();
+
 	}
 
 	public void saveBitmap(String fileName, Bitmap bitmap)
