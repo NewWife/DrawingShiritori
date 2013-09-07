@@ -123,6 +123,8 @@ implements OnClickListener
 		{
 			// テーマを自動的に生成する
 			preWord = generateThemeWord();
+			// テーマをセットする
+			wordEditText.setText(preWord);
 			// 単語入力の無効化を行う
 			disableWordInput();
 		}else{
@@ -285,11 +287,10 @@ implements OnClickListener
 	}
 
 	/**
-	 *  お題を入力し、エディット出来なくする
+	 *  お題を入力した後、エディット出来なくする
 	 */
 	private void disableWordInput()
 	{
-		wordEditText.setText(preWord);
 		wordEditText.setEnabled(false);
 		wordEditText.setFocusable(false);
 
