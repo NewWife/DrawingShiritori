@@ -37,13 +37,9 @@ implements View.OnClickListener
 		//グローバル変数を取得
 		globals = (Globals) this.getApplication();
 				
-		//ファイルのパスから絵を取得し、画像を表示させる。
-		//File imgfile = new File(globals.imgPath);
-		//if(imgfile.exists()){
-		//Bitmap imgBitmap = BitmapFactory.decodeFile(imgfile.getAbsolutePath());
 		Bitmap imgBitmap = globals.loadBitmap(globals.imgPath);
 		imgview.setImageBitmap(imgBitmap);
-		//}
+
 
 	}
 
@@ -67,7 +63,7 @@ implements View.OnClickListener
 				 //トーストで表示させる。
                 Toast toast =
                 Toast.makeText(getApplicationContext(),
-                        String.format("正解！次の人へ交代"),
+                        String.format("正解！続きを描いて下さい！"),
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();

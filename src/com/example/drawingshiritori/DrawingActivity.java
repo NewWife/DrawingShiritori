@@ -177,6 +177,7 @@ implements OnClickListener
 	private void onClickOkButton()
 	{
 		String inputWord = wordEditText.getText().toString();
+		
 
 		// 既に単語を入力していた場合
 		// バリデーションに引っかかった場合

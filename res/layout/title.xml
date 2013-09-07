@@ -15,7 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="履歴" />
+        android:text="設定" />
 
     <Button
         android:id="@+id/start_title_button"

@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/drawing_clear_button"
             android:contentDescription="消しゴム"
-            android:src="@android:drawable/alert_light_frame"/>
+            android:src="@drawable/elaser"/>
 
         <ImageButton
             android:id="@+id/drawing_pen_button"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/drawing_eraser_button"
             android:contentDescription="ペン"
-            android:src="@android:drawable/arrow_down_float"/>
+            android:src="@drawable/pen"/>
     </RelativeLayout>
 
     <com.example.drawingshiritori.DrawSurfaceView
