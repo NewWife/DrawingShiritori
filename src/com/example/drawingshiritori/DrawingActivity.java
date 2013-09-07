@@ -61,6 +61,7 @@ implements OnClickListener
 	private final String LOG = "DrawingActivity";
 	// 【DEBUG】テンプレートのお題をこちらで決める
 	private final String[] TEMPLATE_THEME_WORD = {"とけい", "ごりら", "らっぱ", "こっぷ", "はんが"};
+
 	// 【DEBUG】制限時間をこちらで決める
 	private final int LIMIT_TIME = 60;
 
@@ -106,6 +107,7 @@ implements OnClickListener
 
 		// カウントダウンタイマーを指定の時間で初期化する
 		myCountDownTimer = new MyCountDownTimer(LIMIT_TIME * 1000, 10, remainTextView);
+
 
 		// 一番始めかどうかを調べる
 		Intent intent = getIntent();
