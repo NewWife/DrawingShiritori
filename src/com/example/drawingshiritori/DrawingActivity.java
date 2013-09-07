@@ -81,10 +81,12 @@ implements OnClickListener
 
 	private Globals globals;
 
+
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.drawing);
+
 
 		globals = (Globals)this.getApplication();
 
@@ -103,10 +105,12 @@ implements OnClickListener
 		eraserButton.setOnClickListener(this);
 		ImageButton penButton = (ImageButton)findViewById(R.id.drawing_pen_button);
 		penButton.setOnClickListener(this);
+
 		TextView remainTextView = (TextView)findViewById(R.id.drawing_remain_time_text_view);
 
 		// カウントダウンタイマーを指定の時間で初期化する
 		myCountDownTimer = new MyCountDownTimer(LIMIT_TIME * 1000, 10, remainTextView);
+
 
 
 		// 一番始めかどうかを調べる
