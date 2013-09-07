@@ -26,20 +26,26 @@ public class Globals extends Application
 	int player;
 	//制限時間
 	int limit;
+	//何が描かれているのか
+	String word;
+	//絵へのパス
+	String imgPath;
 	// 描いた人
 	int drawer;
-	// 画像のパス
-	String imgPath;
 	// パスした人
 	ArrayList<Integer> pather;
 	// 罰ゲームの内容
 	String[] penaltys;
+	//間違えた人の人数
+	int failnum;
 
 	//全て初期化するメソッド
 	public void GlobalAllInit(){
 		now = 1;
 		player = 3;
 		limit = 60;
+		word = "";
+		imgPath = "";
 		drawer = 1;
 		imgPath = null;
 		pather = new ArrayList<Integer>();
@@ -48,6 +54,7 @@ public class Globals extends Application
 		{
 			penaltys[i] = PENALTY_CONTENTS[i];
 		}
+		failnum = 0;
 	}
 
 	public void saveBitmap(String fileName, Bitmap bitmap)
@@ -73,7 +80,7 @@ public class Globals extends Application
 	 * @param fileName 読み込みたいファイル名
 	 * @return bitmap Bitmap型
 	 */
-	private Bitmap loadBitmap(String fileName)
+	public Bitmap loadBitmap(String fileName)
 	{
 		Bitmap bitmap = null;
 		try

@@ -42,6 +42,7 @@ implements OnClickListener
 			// 現在描いている人を罰ゲームの対象にして罰ゲーム表示画面へ
 			globals.pather.add(globals.now);
 			Intent intent = new Intent(DrawingActivity.this, ShowingPenaltyActivity.class);
+			myCountDownTimer.cancel();
 			startActivity(intent);
 		}
 
@@ -61,6 +62,7 @@ implements OnClickListener
 	private final String LOG = "DrawingActivity";
 	// 【DEBUG】テンプレートのお題をこちらで決める
 	private final String[] TEMPLATE_THEME_WORD = {"とけい", "ごりら", "らっぱ", "こっぷ", "はんが"};
+
 	// 【DEBUG】制限時間をこちらで決める
 	private final int LIMIT_TIME = 60;
 
@@ -80,10 +82,12 @@ implements OnClickListener
 
 	private Globals globals;
 
+
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.drawing);
+
 
 		globals = (Globals)this.getApplication();
 
@@ -102,10 +106,13 @@ implements OnClickListener
 		eraserButton.setOnClickListener(this);
 		ImageButton penButton = (ImageButton)findViewById(R.id.drawing_pen_button);
 		penButton.setOnClickListener(this);
+
 		TextView remainTextView = (TextView)findViewById(R.id.drawing_remain_time_text_view);
 
 		// カウントダウンタイマーを指定の時間で初期化する
 		myCountDownTimer = new MyCountDownTimer(LIMIT_TIME * 1000, 10, remainTextView);
+
+
 
 		// 一番始めかどうかを調べる
 		Intent intent = getIntent();
@@ -118,6 +125,9 @@ implements OnClickListener
 			preWord = generateThemeWord();
 			// 単語入力の無効化を行う
 			disableWordInput();
+		}else{
+			String tailstr = globals.word.substring(globals.word.length()-1);
+			wordEditText.setText(tailstr);
 		}
 	}
 
@@ -243,6 +253,7 @@ implements OnClickListener
 		{
 			// 罰ゲーム通知画面に飛ばす
 			Intent intent = new Intent(DrawingActivity.this, ShowingPenaltyActivity.class);
+			myCountDownTimer.cancel();
 			startActivity(intent);
 		}
 		 */
@@ -257,8 +268,10 @@ implements OnClickListener
 		// 順番を次に飛ばして
 		int next = (++globals.now) % globals.player;
 		globals.now = next;
+		globals.word = wordEditText.getText().toString();
 		// 画面を切り替えて次の人移り、答え予測画面へ
 		Intent intent = new Intent(DrawingActivity.this, GuessActivity.class);
+		myCountDownTimer.cancel();
 		startActivity(intent);
 	}
 
