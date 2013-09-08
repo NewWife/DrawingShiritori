@@ -147,8 +147,10 @@ implements OnClickListener
 			disableWordInput();
 		}else{
 			String tailstr = globals.word.substring(globals.word.length()-1);
-			wordEditText.setText(tailstr);
-		}
+				wordEditText.setText(tailstr);
+			}
+			
+		
 	}
 
 	@Override
@@ -219,6 +221,7 @@ implements OnClickListener
 	private boolean validation(String str)
 	{
 		final String MATCH_HIRAGANA = "^[\\u3040-\\u309F]+$";
+		final String MATCH_SOUND_MARK = "\u30FC";
 		// 文字が入力されているか
 		if(str.length() == 0)
 		{
@@ -226,8 +229,13 @@ implements OnClickListener
 			return false;
 		}
 		// ひらがなんみで入力されているか
+		String tailstr = str.substring(str.length()-1);
 		if(!str.matches(MATCH_HIRAGANA))
 		{
+			//一番後ろに横棒が付いている場合
+			if(tailstr.equals(MATCH_SOUND_MARK))
+				return true;
+			
 			Toast.makeText(this, "ひらがなのみで入力して下さい", Toast.LENGTH_SHORT).show();
 			return false;
 		}
