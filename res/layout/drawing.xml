@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/drawing_word_ok_button"
+            android:hint="「ひらがな」のみ"
             android:inputType="text" />
     </RelativeLayout>
 
