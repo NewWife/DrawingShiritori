@@ -2,6 +2,7 @@ package com.example.drawingshiritori;
 
 import java.io.File;
 
+import com.example.drawingshiritori.DrawingActivity.MyCountDownTimer;
 import com.example.pictureshiritori.R;
 
 import android.app.Activity;
@@ -10,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.SpannableStringBuilder;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GuessActivity extends Activity
@@ -41,9 +44,41 @@ implements View.OnClickListener
 	    return super.dispatchKeyEvent(event);
 	}
 
+	/**
+	 * カウントダウン機能を提供するためのクラス
+	 */
+	public class MyCountDownTimer extends CountDownTimer
+	{
+		private TextView timerView;
+
+		public MyCountDownTimer(long millisInFuture, long countDownInterval, TextView timerView)
+		{
+			super(millisInFuture, countDownInterval);
+			this.timerView = timerView;
+		}
+
+		@Override
+		public void onFinish()
+		{
+			// カウントダウン完了後に呼ばれる
+			timerView.setText("0.00");
+			failureGuess();
+			myCountDownTimer.cancel();
+		}
+
+		@Override
+		public void onTick(long millisUntilFinished) {
+
+			// インターバル(countDownInterval)毎に呼ばれる
+			timerView.setText(Long.toString(millisUntilFinished/1000%60) + ":" + String.format("%02d", (millisUntilFinished / 10)%100));
+		}
+
+	}
+
 	//グローバル変数
 	Globals globals;
 	MediaPlayer mp = null;
+	MyCountDownTimer myCountDownTimer;
 
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -54,11 +89,18 @@ implements View.OnClickListener
 		Button okButton = (Button)findViewById(R.id.guess_word_ok_button);
 		okButton.setOnClickListener(this);
 
+		TextView remainTextView = (TextView)findViewById(R.id.guess_remain_time_text_view);
+
 		//グローバル変数を取得
 		globals = (Globals) this.getApplication();
 
 		Bitmap imgBitmap = globals.loadBitmap(globals.imgPath);
 		imgview.setImageBitmap(imgBitmap);
+
+		// カウントダウンタイマーを指定の時間で初期化する
+		myCountDownTimer = new MyCountDownTimer(globals.limit * 1000, 10, remainTextView);
+
+		myCountDownTimer.start();
 	}
 
 
@@ -89,6 +131,7 @@ implements View.OnClickListener
 					//次の人へ
 					Intent i = new Intent(this, DrawingActivity.class);
 					i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+					myCountDownTimer.cancel();
 					startActivity(i);
 				}else{//前に間違えた人がいる場合
 					//トーストで表示させる。
@@ -100,54 +143,65 @@ implements View.OnClickListener
 					toast.show();
 					Intent i = new Intent(this, ShowingPenaltyActivity.class);
 					i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+					myCountDownTimer.cancel();
 					startActivity(i);
 				}
 
 			}else{
 				//外した場合の処理
-				mp = MediaPlayer.create(this, R.raw.fuseikai);
-				mp.start();
-
-				// 順番を次に飛ばして
-				int next = (globals.now + 1) % globals.player;
-				// 次のプレイヤーが描いた人と異なれば
-				if(globals.drawer != next)
-				{
-					//トーストで表示させる。
-					Toast toast =
-							Toast.makeText(getApplicationContext(),
-									String.format("不正解！次の人へパス"),
-									Toast.LENGTH_SHORT);
-					toast.setGravity(Gravity.CENTER, 0, 0);
-					toast.show();
-					globals.failnum++;
-					// パスした人を登録し
-					globals.pather.add(globals.now);
-					globals.now = next;
-					// 画面を切り替えて次の人へ
-					Intent intent = new Intent(this, GuessActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(intent);
-				}
-				// 描いた人ならば
-				else
-				{
-					// パスした人を全て除外し、
-					globals.pather.clear();
-					// 罰ゲーム通知画面に飛ばす
-					Intent intent = new Intent(this, ShowingPenaltyActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-					//トーストで表示させる。
-					Toast toast1 =
-							Toast.makeText(getApplicationContext(),
-									String.format("不正解！絵を書いた人罰ゲーム！"),
-									Toast.LENGTH_LONG);
-					toast1.setGravity(Gravity.CENTER, 0, 0);
-					toast1.show();
-					startActivity(intent);
-				}
+				failureGuess();
 			}
 
+		}
+	}
+
+	/**
+	 * プレイヤーが絵から予測出来なかった時
+	 */
+	private void failureGuess()
+	{
+		mp = MediaPlayer.create(this, R.raw.fuseikai);
+		mp.start();
+
+		// 順番を次に飛ばして
+		int next = (globals.now + 1) % globals.player;
+		// 次のプレイヤーが描いた人と異なれば
+		if(globals.drawer != next)
+		{
+			//トーストで表示させる。
+			Toast toast =
+					Toast.makeText(getApplicationContext(),
+							String.format("不正解！次の人へパス"),
+							Toast.LENGTH_SHORT);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+			globals.failnum++;
+			// パスした人を登録し
+			globals.pather.add(globals.now);
+			globals.now = next;
+			// 画面を切り替えて次の人へ
+			Intent intent = new Intent(this, GuessActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			myCountDownTimer.cancel();
+			startActivity(intent);
+		}
+		// 描いた人ならば
+		else
+		{
+			// パスした人を全て除外し、
+			globals.pather.clear();
+			// 罰ゲーム通知画面に飛ばす
+			Intent intent = new Intent(this, ShowingPenaltyActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			myCountDownTimer.cancel();
+			//トーストで表示させる。
+			Toast toast1 =
+					Toast.makeText(getApplicationContext(),
+							String.format("不正解！絵を書いた人罰ゲーム！"),
+							Toast.LENGTH_LONG);
+			toast1.setGravity(Gravity.CENTER, 0, 0);
+			toast1.show();
+			startActivity(intent);
 		}
 	}
 

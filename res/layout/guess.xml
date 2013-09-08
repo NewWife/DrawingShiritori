@@ -16,22 +16,43 @@
             android:id="@+id/guess_word_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:inputType="text" />
 
         <Button
             android:id="@+id/guess_word_ok_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="OK"
-            android:layout_weight="3" />
+            android:layout_weight="3"
+            android:text="OK" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/guess_remain_time_row_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/guess_word_row_layout" >
+
+        <TextView
+            android:id="@+id/guess_remain_time_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="残り時間"
+            android:textSize="20dp" />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/guess_imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/guess_word_row_layout"
+        android:layout_below="@id/guess_remain_time_row_layout"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:layout_marginBottom="30dp"

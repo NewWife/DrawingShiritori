@@ -34,13 +34,15 @@
             android:id="@+id/drawing_remain_time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="残り時間" />
+            android:text="残り時間"
+            android:textSize="20dp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -62,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:contentDescription="クリア"
-            android:src="@android:drawable/alert_dark_frame"/>
+            android:src="@android:drawable/alert_dark_frame" />
 
         <ImageButton
             android:id="@+id/drawing_eraser_button"
@@ -70,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/drawing_clear_button"
             android:contentDescription="消しゴム"
-            android:src="@drawable/elaser"/>
+            android:src="@drawable/elaser" />
 
         <ImageButton
             android:id="@+id/drawing_pen_button"
@@ -78,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/drawing_eraser_button"
             android:contentDescription="ペン"
-            android:src="@drawable/pen"/>
+            android:src="@drawable/pen" />
     </RelativeLayout>
 
     <com.example.drawingshiritori.DrawSurfaceView
