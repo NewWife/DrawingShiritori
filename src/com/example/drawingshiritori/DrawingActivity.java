@@ -63,9 +63,6 @@ implements OnClickListener
 	// 【DEBUG】テンプレートのお題をこちらで決める
 	private final String[] TEMPLATE_THEME_WORD = {"とけい", "ごりら", "らっぱ", "こっぷ", "はんが"};
 
-	// 【DEBUG】制限時間をこちらで決める
-	private final int LIMIT_TIME = 60;
-
 	// ペンの太さ、消しゴムの太さをこちらで設定
 	private final int PEN_WIDTH = 5, ERASER_WIDTH = 20;
 
@@ -110,7 +107,7 @@ implements OnClickListener
 		TextView remainTextView = (TextView)findViewById(R.id.drawing_remain_time_text_view);
 
 		// カウントダウンタイマーを指定の時間で初期化する
-		myCountDownTimer = new MyCountDownTimer(LIMIT_TIME * 1000, 10, remainTextView);
+		myCountDownTimer = new MyCountDownTimer(globals.limit * 1000, 10, remainTextView);
 
 
 
@@ -179,7 +176,7 @@ implements OnClickListener
 	private void onClickOkButton()
 	{
 		String inputWord = wordEditText.getText().toString();
-		
+
 
 		// 既に単語を入力していた場合
 		// バリデーションに引っかかった場合
