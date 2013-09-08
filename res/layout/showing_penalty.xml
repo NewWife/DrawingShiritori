@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="罰ゲーム表示画面" />
+        android:text="タイトル画面へ" />
 
     <RelativeLayout
         android:id="@+id/showwing_penalty_layout"

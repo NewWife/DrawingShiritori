@@ -66,6 +66,7 @@ implements OnClickListener
 	public void onClick(View v)
 	{
 		Intent intent = new Intent(ShowingPenaltyActivity.this, TitleActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
 	}
 }

@@ -88,6 +88,7 @@ implements View.OnClickListener
 					globals.failnum = 0;
 					//次の人へ
 					Intent i = new Intent(this, DrawingActivity.class);
+					i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(i);
 				}else{//前に間違えた人がいる場合
 					//トーストで表示させる。
@@ -98,6 +99,7 @@ implements View.OnClickListener
 					toast.setGravity(Gravity.CENTER, 0, 0);
 					toast.show();
 					Intent i = new Intent(this, ShowingPenaltyActivity.class);
+					i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(i);
 				}
 
@@ -124,6 +126,7 @@ implements View.OnClickListener
 					globals.now = next;
 					// 画面を切り替えて次の人へ
 					Intent intent = new Intent(this, GuessActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
 				}
 				// 描いた人ならば
@@ -133,6 +136,7 @@ implements View.OnClickListener
 					globals.pather.clear();
 					// 罰ゲーム通知画面に飛ばす
 					Intent intent = new Intent(this, ShowingPenaltyActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 					//トーストで表示させる。
 					Toast toast1 =
 							Toast.makeText(getApplicationContext(),
