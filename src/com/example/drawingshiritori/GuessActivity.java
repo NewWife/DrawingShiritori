@@ -9,7 +9,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.SpannableStringBuilder;
@@ -77,13 +79,26 @@ implements View.OnClickListener
 
 	//グローバル変数
 	Globals globals;
-	MediaPlayer mp = null;
+	//MediaPlayer mp = null;
+	SoundPool soundPoolSeikai, soundPoolFuseikai;
+	int soundIdSeikai, soundIdFuseikai;
 	MyCountDownTimer myCountDownTimer;
 
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.guess);
+
+		// このアクティビティでメディア音量の変更が出来るようにする
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+
+		// 予め音声データを読み込む
+	    soundPoolSeikai = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+	    soundIdSeikai = soundPoolSeikai.load(getApplicationContext(), R.raw.seikai, 0);
+
+	    soundPoolFuseikai = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+	    soundIdFuseikai = soundPoolFuseikai.load(getApplicationContext(), R.raw.fuseikai, 0);
 
 		ImageView imgview = (ImageView)findViewById(R.id.guess_imageView);
 		Button okButton = (Button)findViewById(R.id.guess_word_ok_button);
@@ -100,7 +115,10 @@ implements View.OnClickListener
 		// カウントダウンタイマーを指定の時間で初期化する
 		myCountDownTimer = new MyCountDownTimer(globals.limit * 1000, 10, remainTextView);
 
+		// カウントダウンを開始する
 		myCountDownTimer.start();
+
+
 	}
 
 
@@ -110,15 +128,17 @@ implements View.OnClickListener
 		globals = (Globals) this.getApplication();
 		//何が描かれているのか取得
 		String trueWords = globals.word;
-
 		EditText edittext = (EditText)findViewById(R.id.guess_word_edit_text);
 		if(!edittext.getText().toString().equals("")){
 			SpannableStringBuilder sb = (SpannableStringBuilder)edittext.getText();
 			String str = sb.toString();
 			if(str.equals(trueWords)){
 				//正解した場合の処理
-				mp = MediaPlayer.create(this, R.raw.seikai);
-				mp.start();
+				//mp = MediaPlayer.create(this, R.raw.seikai);
+				//mp.setVolume(2, 2);
+				//mp.start();
+				soundPoolSeikai.play(soundIdSeikai, 1.0F, 1.0F, 0, 0, 1.0F);
+
 				if(globals.failnum  == 0){//前に間違えた人がいない場合
 					//トーストで表示させる。
 					Toast toast =
@@ -155,13 +175,16 @@ implements View.OnClickListener
 		}
 	}
 
+
 	/**
 	 * プレイヤーが絵から予測出来なかった時
 	 */
 	private void failureGuess()
 	{
-		mp = MediaPlayer.create(this, R.raw.fuseikai);
-		mp.start();
+		//mp = MediaPlayer.create(this, R.raw.fuseikai);
+		//mp.setVolume(1024, 1024);
+		//mp.start();
+		soundPoolFuseikai.play(soundIdFuseikai, 1.0F, 1.0F, 0, 0, 1.0F);
 
 		// 順番を次に飛ばして
 		int next = (globals.now + 1) % globals.player;
