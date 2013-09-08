@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,6 +21,25 @@ import android.widget.Toast;
 public class DrawingActivity extends Activity
 implements OnClickListener
 {
+	@Override
+	/**
+	 * 戻るボタンを無効化する
+	 * (非 Javadoc)
+	 * @see android.app.Activity#dispatchKeyEvent(android.view.KeyEvent)
+	 */
+	public boolean dispatchKeyEvent(KeyEvent event){
+	    //画面から離れた場合
+	    if(event.getAction()==KeyEvent.ACTION_UP){
+	        //戻るボタンの場合
+	        if(event.getKeyCode()==KeyEvent.KEYCODE_BACK){
+	            //trueを返して戻るのを無効化する
+	            return true;
+	        }
+	    }
+	    //通常通りの値を返す
+	    return super.dispatchKeyEvent(event);
+	}
+
 	/**
 	 * カウントダウン機能を提供するためのクラス
 	 *
@@ -42,6 +62,7 @@ implements OnClickListener
 			// 現在描いている人を罰ゲームの対象にして罰ゲーム表示画面へ
 			globals.pather.add(globals.now);
 			Intent intent = new Intent(DrawingActivity.this, ShowingPenaltyActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 			myCountDownTimer.cancel();
 			startActivity(intent);
 		}
@@ -190,33 +211,6 @@ implements OnClickListener
 		drawSurfaceView.enableDrawing();
 		Toast.makeText(this, "start drawing", Toast.LENGTH_SHORT).show();
 		isInputedWord = true;
-		// 外した場合
-		/*
-		else
-		{
-			// 順番を次に飛ばして
-			int next = (++globals.now) % globals.player;
-			// 次のプレイヤーが描いた人と異なれば
-			if(globals.drawer != globals.now)
-			{
-				// パスした人を登録し
-				globals.pather.add(next);
-				globals.now = next;
-				// 画面を切り替えて次の人へ
-				Intent intent = new Intent(DrawingActivity.this, DrawingActivity.class);
-				startActivity(intent);
-			}
-			// 描いた人ならば
-			else
-			{
-				// パスした人を全て除外し、
-				globals.pather.clear();
-				// 罰ゲーム通知画面に飛ばす
-				Intent intent = new Intent(DrawingActivity.this, ShowingPenaltyActivity.class);
-				startActivity(intent);
-			}
-		}
-		 */
 	}
 
 	/**
@@ -247,16 +241,6 @@ implements OnClickListener
 	{
 		// 単語を入力していなかった場合
 		if(!isInputedWord) return;
-		/*
-		// パスした人が存在するならば
-		if(globals.pather.size() > 0)
-		{
-			// 罰ゲーム通知画面に飛ばす
-			Intent intent = new Intent(DrawingActivity.this, ShowingPenaltyActivity.class);
-			myCountDownTimer.cancel();
-			startActivity(intent);
-		}
-		 */
 
 		// 画像の保存
 		Bitmap bitmap = drawSurfaceView.getBitmap();
@@ -271,6 +255,7 @@ implements OnClickListener
 		globals.word = wordEditText.getText().toString();
 		// 画面を切り替えて次の人移り、答え予測画面へ
 		Intent intent = new Intent(DrawingActivity.this, GuessActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		myCountDownTimer.cancel();
 		startActivity(intent);
 	}

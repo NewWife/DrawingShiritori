@@ -5,6 +5,7 @@ import com.example.pictureshiritori.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -137,6 +138,7 @@ implements OnClickListener
 		case R.id.start_title_button:
 		{
 			Intent intent = new Intent(TitleActivity.this, DrawingActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 			intent.putExtra("isFirst", true);
 			startActivity(intent);
 		}
