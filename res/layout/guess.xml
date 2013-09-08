@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:hint="絵から予測して「ひらがな」入力"
             android:inputType="text" />
 
         <Button
