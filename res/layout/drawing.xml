@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:contentDescription="クリア"
-            android:src="@android:drawable/alert_dark_frame" />
+            android:src="@drawable/white" />
 
         <ImageButton
             android:id="@+id/drawing_eraser_button"
