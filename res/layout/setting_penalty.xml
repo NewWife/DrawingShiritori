@@ -1,34 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.drawingshiritori.SettingPenaltyActivity" >
 
-    <!--
-    <RelativeLayout
-        android:id="@+id/setting_penalty_add_penalty_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" >
-
-        <Button
-            android:id="@+id/setting_penalty_add_penalty_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="追加" />
-
-        <Spinner
-            android:id="@+id/setting_penalty_add_penalty_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@id/setting_penalty_add_penalty_button"
-            android:textSize="18sp" />
-    </RelativeLayout>
-    -->
 
     <RelativeLayout
         android:id="@+id/setting_penalty_delete_return_layout"
@@ -36,32 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" >
 
-        <!--
-        <Button
-            android:id="@+id/setting_penalty_delete_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="削除" />
-        -->
-
         <Button
             android:id="@+id/setting_penalty_return_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="戻る" />
+            android:text="設定を保存して戻る" />
     </RelativeLayout>
-
-    <!--
-    <ListView
-        android:id="@+id/setting_penalty_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/setting_penalty_add_penalty_layout"
-        android:layout_above="@id/setting_penalty_delete_return_layout">
-    </ListView>
-    -->
 
     <LinearLayout
         android:id="@+id/setting_penalty_pulldown_layout"

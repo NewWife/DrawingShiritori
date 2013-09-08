@@ -12,6 +12,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,25 @@ import android.widget.Toast;
 public class GuessActivity extends Activity
 implements View.OnClickListener
 {
+	@Override
+	/**
+	 * 戻るボタンを無効化する
+	 * (非 Javadoc)
+	 * @see android.app.Activity#dispatchKeyEvent(android.view.KeyEvent)
+	 */
+	public boolean dispatchKeyEvent(KeyEvent event){
+	    //画面から離れた場合
+	    if(event.getAction()==KeyEvent.ACTION_UP){
+	        //戻るボタンの場合
+	        if(event.getKeyCode()==KeyEvent.KEYCODE_BACK){
+	            //trueを返して戻るのを無効化する
+	            return true;
+	        }
+	    }
+	    //通常通りの値を返す
+	    return super.dispatchKeyEvent(event);
+	}
+
 	//グローバル変数
 	Globals globals;
 	MediaPlayer mp = null;
