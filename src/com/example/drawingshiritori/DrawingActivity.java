@@ -274,7 +274,6 @@ implements OnClickListener
 	 */
 	private void disableWordInput()
 	{
-		wordEditText.setEnabled(false);
 		wordEditText.setFocusable(false);
 
 	}
