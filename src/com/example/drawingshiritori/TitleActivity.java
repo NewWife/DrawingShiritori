@@ -25,6 +25,8 @@ implements OnClickListener
 	private String[] player = {"3","4","5","6","7","8","9","10"};
 	//グローバル変数
 	Globals globals;
+	//トーストの管理用
+	int toastcount = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -66,6 +68,7 @@ implements OnClickListener
         	                String valueToStringLimit = String.valueOf(globals.limit);
         	                String valueToStringPlayer = String.valueOf(globals.player);
 
+        	                if(toastcount > 1){
         	                //トーストで表示させる。
         	                Toast toast =
         	                Toast.makeText(getApplicationContext(),
@@ -73,7 +76,8 @@ implements OnClickListener
         	                        Toast.LENGTH_SHORT);
         	                toast.setGravity(Gravity.CENTER, 0, 0);
         	                toast.show();
-
+        	                }
+        	                toastcount++;
         	            }
         	            @Override
         	            public void onNothingSelected(AdapterView<?> parent) {
@@ -98,12 +102,15 @@ implements OnClickListener
         	                String valueToStringPlayer = String.valueOf(globals.player);
 
         	                //トーストで表示させる。
+        	                if(toastcount > 1){
         	                Toast toast =
         	                Toast.makeText(getApplicationContext(),
         	                        String.format("制限時間は%s秒です。"+"\n"+"プレイヤーは%s人です。", valueToStringLimit,valueToStringPlayer),
         	                        Toast.LENGTH_SHORT);
         	                toast.setGravity(Gravity.CENTER, 0, 0);
         	                toast.show();
+        	                }
+        	                toastcount++;
 
         	            }
         	            @Override
