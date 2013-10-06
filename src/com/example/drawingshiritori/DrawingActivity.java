@@ -18,9 +18,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class DrawingActivity extends Activity
 implements OnClickListener
 {
+
 	@Override
 	/**
 	 * 戻るボタンを無効化する
@@ -84,6 +86,7 @@ implements OnClickListener
 	// 【DEBUG】テンプレートのお題をこちらで決める
 	private final String[] TEMPLATE_THEME_WORD = {"とけい", "ごりら", "らっぱ", "こっぷ", "はんが"};
 
+
 	// ペンの太さ、消しゴムの太さをこちらで設定
 	private final int PEN_WIDTH = 5, ERASER_WIDTH = 20;
 
@@ -100,6 +103,7 @@ implements OnClickListener
 
 	private Globals globals;
 
+	private String themeWord;
 
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -113,6 +117,7 @@ implements OnClickListener
 		wordEditText = (EditText)findViewById(R.id.drawing_word_edit_text);
 		drawSurfaceView = (DrawSurfaceView)findViewById(R.id.draw_surface_view);
 		drawSurfaceView.disableDrawing();
+
 
 		Button okButton = (Button)findViewById(R.id.drawing_word_ok_button);
 		okButton.setOnClickListener(this);
@@ -132,9 +137,12 @@ implements OnClickListener
 
 
 
+
+
 		// 一番始めかどうかを調べる
 		Intent intent = getIntent();
 		isFirst = intent.getBooleanExtra("isFirst", false);
+
 
 		// 始めてならば
 		if(isFirst)
@@ -151,6 +159,7 @@ implements OnClickListener
 			}
 			
 		
+
 	}
 
 	@Override
@@ -167,7 +176,9 @@ implements OnClickListener
 		// 次の画面へ移動する
 		case R.id.drawing_next_button:
 		{
+
 			onClickNextButton();
+
 			break;
 		}
 		// クリアボタンが押された場合
@@ -180,6 +191,9 @@ implements OnClickListener
 		case R.id.drawing_eraser_button:
 		{
 			drawSurfaceView.setColor(Color.WHITE, ERASER_WIDTH);
+
+			Log.d(LOG, "push erase button");
+
 			break;
 		}
 		// 鉛筆ボタンが押された場合
@@ -266,7 +280,8 @@ implements OnClickListener
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		myCountDownTimer.cancel();
 		startActivity(intent);
-	}
+		}
+
 
 	/**
 	 * 自動的にお題を生成する関数
@@ -294,5 +309,6 @@ implements OnClickListener
 		// ボタンを見えなくする
 		Button okButton = (Button)findViewById(R.id.drawing_word_ok_button);
 		okButton.setVisibility(View.GONE);
+
 	}
 }
