@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/all_background"
     tools:context="com.example.drawingshiritori.ShowingPenaltyActivity" >
 
     <TextView
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="！罰ゲーム！"
+        android:text="罰ゲーム"
         android:textColor="#FFFF0000"
         android:textSize="50dp" />
 
@@ -37,6 +38,17 @@
             android:layout_centerInParent="true"
             android:text="罰ゲーム内容"
             android:textSize="30dp" />
+
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/showwing_penalty_layout"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="23dp"
+        android:layout_toRightOf="@+id/showwing_penalty_caption"
+        android:src="@drawable/character" />
 
 </RelativeLayout>

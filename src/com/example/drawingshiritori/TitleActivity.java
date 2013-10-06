@@ -7,11 +7,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.Gravity;
@@ -27,12 +29,19 @@ implements OnClickListener
 	Globals globals;
 	//トーストの管理用
 	int toastcount = 0;
+//イメージid
+	int imageId = R.drawable.target;
+	
+	ImageView imageView = null;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.title);
+		//ImageView
+		imageView =(ImageView)findViewById(R.id.imageView1);	
 
 		//グローバル変数を取得
 				globals = (Globals) this.getApplication();
@@ -157,5 +166,20 @@ implements OnClickListener
 		}
 		break;
 		}
+	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+
+		if(event.getAction() == MotionEvent.ACTION_DOWN){
+			if(imageId == R.drawable.target){
+				imageId = R.drawable.target2;
+			} else {
+				imageId = R.drawable.target;
+			}
+
+			imageView.setImageResource(imageId);
+		}
+		return super.onTouchEvent(event);
 	}
 }
