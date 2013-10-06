@@ -19,10 +19,13 @@ implements SurfaceHolder.Callback
 	// 初期で描かれる色の設定
 	private int DEFAULT_COLOR = Color.BLACK;
 
+<<<<<<< Updated upstream
 
 	// キャンバスの描画の有効・無効
 	private boolean drawingDisable = false;
 
+=======
+>>>>>>> Stashed changes
 	private SurfaceHolder mHolder;
 	private Bitmap bitmap;
 

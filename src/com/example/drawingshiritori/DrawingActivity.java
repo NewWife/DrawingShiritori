@@ -4,24 +4,34 @@ import com.example.pictureshiritori.R;
 
 import android.app.Activity;
 import android.content.Intent;
+<<<<<<< Updated upstream
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.KeyEvent;
+=======
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
+>>>>>>> Stashed changes
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+<<<<<<< Updated upstream
 import android.widget.Toast;
 
+=======
+>>>>>>> Stashed changes
 
 public class DrawingActivity extends Activity
 implements OnClickListener
 {
+<<<<<<< Updated upstream
 
 	@Override
 	/**
@@ -86,12 +96,21 @@ implements OnClickListener
 	// 【DEBUG】テンプレートのお題をこちらで決める
 	private final String[] TEMPLATE_THEME_WORD = {"とけい", "ごりら", "らっぱ", "こっぷ", "はんが"};
 
+=======
+	// 【DEBUG】
+	private final String LOG = "DrawingActivity";
+	// 【DEBUG】テンプレートのお題をこちらで決める
+	private final String[] TEMPLATE_THEME_WORD = {"とけい", "ゴリラ", "ラッパ", "コップ", "ハンガー"};
+	// 【DEBUG】制限時間をこちらで決める
+	private final int LIMIT_TIME = 60;
+>>>>>>> Stashed changes
 
 	// ペンの太さ、消しゴムの太さをこちらで設定
 	private final int PEN_WIDTH = 5, ERASER_WIDTH = 20;
 
 	// お絵かきビュー
 	private DrawSurfaceView drawSurfaceView;
+<<<<<<< Updated upstream
 	// カウントダウンをするカスタムクラス
 	private EditText wordEditText;
 	private MyCountDownTimer myCountDownTimer;
@@ -103,6 +122,10 @@ implements OnClickListener
 
 	private Globals globals;
 
+=======
+	private boolean isFirst;
+	private boolean isInputedWord;
+>>>>>>> Stashed changes
 	private String themeWord;
 
 	public void onCreate(Bundle savedInstanceState)
@@ -110,6 +133,7 @@ implements OnClickListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.drawing);
 
+<<<<<<< Updated upstream
 
 		globals = (Globals)this.getApplication();
 
@@ -119,6 +143,10 @@ implements OnClickListener
 		drawSurfaceView.disableDrawing();
 
 
+=======
+		// get layout content
+		drawSurfaceView = (DrawSurfaceView)findViewById(R.id.draw_surface_view);
+>>>>>>> Stashed changes
 		Button okButton = (Button)findViewById(R.id.drawing_word_ok_button);
 		okButton.setOnClickListener(this);
 		Button nextButton = (Button)findViewById(R.id.drawing_next_button);
@@ -130,6 +158,7 @@ implements OnClickListener
 		ImageButton penButton = (ImageButton)findViewById(R.id.drawing_pen_button);
 		penButton.setOnClickListener(this);
 
+<<<<<<< Updated upstream
 		TextView remainTextView = (TextView)findViewById(R.id.drawing_remain_time_text_view);
 
 		// カウントダウンタイマーを指定の時間で初期化する
@@ -139,10 +168,13 @@ implements OnClickListener
 
 
 
+=======
+>>>>>>> Stashed changes
 		// 一番始めかどうかを調べる
 		Intent intent = getIntent();
 		isFirst = intent.getBooleanExtra("isFirst", false);
 
+<<<<<<< Updated upstream
 
 		// 始めてならば
 		if(isFirst)
@@ -160,6 +192,21 @@ implements OnClickListener
 			
 		
 
+=======
+		// 始めならば
+		if(isFirst)
+		{
+			// テーマを自動的に生成する
+			themeWord = generateThemeWord();
+			// ボタンを見えなくする
+			okButton = (Button)findViewById(R.id.drawing_word_ok_button);
+			// お題を入力し、エディット出来なくする
+			EditText editText = (EditText)findViewById(R.id.drawing_word_edit_text);
+			editText.setText(themeWord);
+			editText.setEnabled(false);
+			editText.setFocusable(false);
+		}
+>>>>>>> Stashed changes
 	}
 
 	@Override
@@ -170,15 +217,22 @@ implements OnClickListener
 		// 単語の入力欄に対してOKを押した場合
 		case R.id.drawing_word_ok_button:
 		{
+<<<<<<< Updated upstream
 			onClickOkButton();
+=======
+
+>>>>>>> Stashed changes
 			break;
 		}
 		// 次の画面へ移動する
 		case R.id.drawing_next_button:
 		{
 
+<<<<<<< Updated upstream
 			onClickNextButton();
 
+=======
+>>>>>>> Stashed changes
 			break;
 		}
 		// クリアボタンが押された場合
@@ -191,9 +245,13 @@ implements OnClickListener
 		case R.id.drawing_eraser_button:
 		{
 			drawSurfaceView.setColor(Color.WHITE, ERASER_WIDTH);
+<<<<<<< Updated upstream
 
 			Log.d(LOG, "push erase button");
 
+=======
+			Log.d(LOG, "push erase button");
+>>>>>>> Stashed changes
 			break;
 		}
 		// 鉛筆ボタンが押された場合
@@ -207,6 +265,7 @@ implements OnClickListener
 		}
 	}
 
+<<<<<<< Updated upstream
 	/**
 	 * 書くお題に対してOKボタンを押した時の
 	 */
@@ -284,12 +343,21 @@ implements OnClickListener
 
 
 	/**
+=======
+	private void onClickOkButton()
+	{
+
+	}
+
+	/**
+>>>>>>> Stashed changes
 	 * 自動的にお題を生成する関数
 	 */
 	private String generateThemeWord()
 	{
 		int r = (int)(Math.random() * TEMPLATE_THEME_WORD.length);
 		return TEMPLATE_THEME_WORD[r];
+<<<<<<< Updated upstream
 	}
 
 	/**
@@ -310,5 +378,7 @@ implements OnClickListener
 		Button okButton = (Button)findViewById(R.id.drawing_word_ok_button);
 		okButton.setVisibility(View.GONE);
 
+=======
+>>>>>>> Stashed changes
 	}
 }

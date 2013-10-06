@@ -21,7 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/drawing_word_ok_button"
+<<<<<<< Updated upstream
             android:hint="「ひらがな」のみ"
+=======
+>>>>>>> Stashed changes
             android:inputType="text" />
     </RelativeLayout>
 
@@ -35,13 +38,18 @@
             android:id="@+id/drawing_remain_time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< Updated upstream
             android:layout_alignParentRight="true"
             android:textSize="20dp" />
 
+=======
+            android:layout_alignParentRight="true" />
+>>>>>>> Stashed changes
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< Updated upstream
             android:layout_alignParentLeft="true"
             android:text="残り時間"
             android:textSize="20dp" />
@@ -58,6 +66,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+=======
+            android:layout_alignParentLeft="true"
+            android:text="残り時間" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/drawing_navigation_row_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/drawing_next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+>>>>>>> Stashed changes
             android:text="次へ" />
 
         <ImageButton
@@ -66,7 +91,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:contentDescription="クリア"
+<<<<<<< Updated upstream
             android:src="@drawable/white" />
+=======
+            android:src="@android:drawable/alert_dark_frame"/>
+>>>>>>> Stashed changes
 
         <ImageButton
             android:id="@+id/drawing_eraser_button"
@@ -74,8 +103,12 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/drawing_clear_button"
             android:contentDescription="消しゴム"
+<<<<<<< Updated upstream
             android:src="@drawable/elaser" />
 
+=======
+            android:src="@android:drawable/alert_light_frame"/>
+>>>>>>> Stashed changes
 
         <ImageButton
             android:id="@+id/drawing_pen_button"
@@ -83,8 +116,12 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/drawing_eraser_button"
             android:contentDescription="ペン"
+<<<<<<< Updated upstream
             android:src="@drawable/pen" />
 
+=======
+            android:src="@android:drawable/arrow_down_float"/>
+>>>>>>> Stashed changes
     </RelativeLayout>
 
     <com.example.drawingshiritori.DrawSurfaceView
